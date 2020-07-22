@@ -1,0 +1,23 @@
+
+import timeit
+import re
+
+def regexit(input):
+    return re.split( "\||<>", input )
+
+def split2(input): # Solution by @duncan
+    res0 = input.split("|")
+    res1, res2 = [], []
+    for r in res0:
+        if "<>" in r:
+            res2.append(r.split("<>"))
+        else:
+            res1.append(r)
+    return res1, res2
+
+print "split2:", timeit.Timer("split2('a|b|c|de|f<>ge<>ah')","from __main__ import split2").timeit()
+print "regex:", timeit.Timer("regexit('a|b|c|de|f<>ge<>ah')","from __main__ import regexit").timeit()
+
+
+text = "42,0"
+nums = [int(n) for n in text.split(",")]
